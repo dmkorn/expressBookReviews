@@ -11,7 +11,25 @@ app.use(express.json());
 app.use("/customer",session({secret:"fingerprint_customer",resave: true, saveUninitialized: true}))
 
 app.use("/customer/auth/*", function auth(req,res,next){
-//Write the authenication mechanism here
+
+    //  Authentication Mechanism following hint to use authorization feature in practice project lab
+    if (req.session.authorization) {
+        let token = req.session.authorization['accessToken'];
+
+        // Check Token to see if user is authorized
+        jwt.verify(token, "access", (err, user) => {
+            if (!err) {
+                req.user = user;
+                //  Go to next session handler
+                next();
+            } else {
+                return res.status(403).json({ message: "User not authenticated" });
+            }
+        });
+    } else {
+        return res.status(403).json({ message: "User not authorized / authorization not found" });
+    }
+
 });
  
 const PORT =5000;
