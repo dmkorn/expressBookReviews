@@ -12,14 +12,20 @@ public_users.post("/register", (req,res) => {
 
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+
+    //  Task 1:  Complete the code for getting the list of books available in the shop
+    res.send(JSON.stringify(books,null,4));
+
 });
 
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+
+    //  Task 2:  Complete the code for getting the book details based on ISBN
+    //  This assumes the isbn is they key of the books map, which is not
+    //  explicitly specified.  It is the bet interpretation of this I can find.
+    const isbn = req.params.isbn;
+    res.send(books[isbn])
  });
   
 // Get book details based on author
