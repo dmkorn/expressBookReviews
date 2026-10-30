@@ -43,7 +43,6 @@ public_users.get('/author/:author',function (req, res) {
     }
 
     res.send(JSON.stringify(authorsBooks, null, 4));
-
 });
 
 // Get all books based on title
@@ -61,13 +60,28 @@ public_users.get('/title/:title',function (req, res) {
     }
 
     res.send(JSON.stringify(titleBooks, null, 4));
-
 });
 
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+
+    //  Task 5:  Get the book reviews based on ISBN provided in the request parameters
+    const isbn = req.params.isbn;
+
+    let book = books[isbn];
+
+    if (Object.hasOwn(book, "reviews")){
+        if (books["reviews"] == null){
+            res.status(400).json({message: "No reviews found for that book"});
+        }
+        else {
+            res.send(JSON.stringify(books["reviews"], null, 4));
+        }
+    }
+    else {
+        res.status(400).json({message: "No books with that ISBN having a review object"});
+    }
 });
+
 
 module.exports.general = public_users;
