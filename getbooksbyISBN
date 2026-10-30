@@ -1,2 +1,6 @@
 curl https://danielmkorn-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/isbn/1
-{"author":"Chinua Achebe","title":"Things Fall Apart","reviews":{}}
+{
+    "author": "Chinua Achebe",
+    "title": "Things Fall Apart",
+    "reviews": {}
+}
