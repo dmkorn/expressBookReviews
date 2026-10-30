@@ -37,16 +37,10 @@ public_users.get('/author/:author',function (req, res) {
     let authorsBooks = {};
 
     for (const key in books) {
-    if (Object.hasOwn(books, key) && books[key].author === author) {
-        authorsBooks[key] = books[key]
+        if (Object.hasOwn(books, key) && books[key].author === author) {
+            authorsBooks[key] = books[key]
+        }
     }
-  }
-
-    let isArray = Array.isArray(books.books);
-
-
-
-    //let booksByAuthor = books.books.filter((book) =>  book.author === author);
 
     res.send(JSON.stringify(authorsBooks, null, 4));
 
@@ -54,8 +48,20 @@ public_users.get('/author/:author',function (req, res) {
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+
+    //  Task 4:  Complete the code for getting the book details based on the title 
+    const title = req.params.title;
+
+    let titleBooks = {};
+
+    for(const key in books) {
+        if (Object.hasOwn(books,key) && books[key].title === title) {
+            titleBooks[key] = books[key]
+        }
+    }
+
+    res.send(JSON.stringify(titleBooks, null, 4));
+
 });
 
 //  Get book review

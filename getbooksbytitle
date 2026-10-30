@@ -1,0 +1,8 @@
+curl https://danielmkorn-5000.theianext-1-labs-prod-mistools-us-east-0.proxy.cognitiveclass.ai/title/Fairy%20tales
+{
+    "2": {
+        "author": "Hans Christian Andersen",
+        "title": "Fairy tales",
+        "reviews": {}
+    }
+}
