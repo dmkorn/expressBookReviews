@@ -7,7 +7,7 @@ const public_users = express.Router();
 
 const userExists = (username) => {
     //  Filter auth_users for an existing user with this username
-    let foundUsers = users.users.filter((user) => {
+    let foundUsers = users.filter((user) => {
         return user.username === username;
     });
 
@@ -25,14 +25,12 @@ public_users.post("/register", (req,res) => {
 
     const username = req.body.username;
     const password = req.body.password;
-    console.log(username)
-    console.log(password)
 
     // Check if both username and password are provided
     if (username && password) {
         if (!userExists(username) ) {
             //  Verify the username is valid.  This function needs to be implemented.  It trivially returns true.
-            if (users.isValid(username)){
+            if (isValid(username)){
                 //  Add the new username and password
                 users.push({"username": username, "password": password});
                 return res.status(200).json({message: "User has been registered."});
