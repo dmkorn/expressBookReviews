@@ -1,0 +1,2 @@
+curl -X POST https://danielmkorn-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/customer/login -H "Content-Type: application/json" -d '{"username": "test", "password" : "test2"}'
+{"message":"User has been logged in"}
