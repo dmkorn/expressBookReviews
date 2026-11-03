@@ -1,0 +1,2 @@
+curl -X PUT -b cookies.txt -c cookies.txt https://danielmkorn-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/customer/auth/review/1 -H "Content-Type: application/json" -d '{"review":"Begin test book review.  This was a good book.  End test book review."}'
+{"message":"Book review has been saved"}
