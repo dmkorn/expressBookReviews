@@ -66,8 +66,37 @@ regd_users.post("/login", (req,res) => {
 
 // Add a book review
 regd_users.put("/auth/review/:isbn", (req, res) => {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+
+
+    //Write your code here
+
+
+    //  Task 8:  Complete the code for adding or modifying a book review
+    const username = req.session.authorization['username']
+
+
+    // Check for username stored in session authorization
+    if (!username) {
+        return res.status(404).json({ message: "Username in session required for login" });
+    }
+
+    //  This needs to be tested
+    if(req.method === 'QUERY'){
+        const queryData = req.body;
+        console.log("Success - this is a query to auth / review / isbn")
+        console.log(queryData);
+    }
+    else{
+        console.log("Query data not found");
+    }
+
+    //  DMK - this works
+    console.log(req.body.query)
+
+    //Write your code here
+
+    return res.status(300).json({message: "Implementation in Progress"});
+
 });
 
 
