@@ -80,22 +80,27 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
         return res.status(404).json({ message: "Username in session required for login" });
     }
 
-    //  This needs to be tested
-    if(req.method === 'QUERY'){
-        const queryData = req.body;
-        console.log("Success - this is a query to auth / review / isbn")
-        console.log(queryData);
-    }
-    else{
-        console.log("Query data not found");
+    const isbn = req.params.isbn;
+    const review = req.body.review;
+
+    if (!isbn) {
+        return res.status(404).json({ message: "ISBN parameter required for adding a book review" });
     }
 
-    //  DMK - this works
-    console.log(req.body.query)
+    if (!review) {
+        return res.status(404).json({ message: "Review parameter required for adding a book review" });
+    }
 
-    //Write your code here
+    let book = books[isbn];
 
-    return res.status(300).json({message: "Implementation in Progress"});
+    if (!book) {
+        return res.status(404).json({ message: "Book not found.  ISBN parameter required to correspond to a book in the database." });
+    }
+
+    //  Add or update book review per specific username
+    book.reviews[username] = review;
+
+    return res.status(200).json({message: "Book review has been saved"});
 
 });
 

@@ -110,11 +110,11 @@ public_users.get('/review/:isbn',function (req, res) {
     let book = books[isbn];
 
     if (Object.hasOwn(book, "reviews")){
-        if (books["reviews"] == null){
+        if (book["reviews"] == null){
             res.status(400).json({message: "No reviews found for that book"});
         }
         else {
-            res.send(JSON.stringify(books["reviews"], null, 4));
+            res.send(book["reviews"], null, 4);
         }
     }
     else {
