@@ -73,7 +73,16 @@ public_users.get('/isbn/:isbn',function (req, res) {
     //  explicitly specified.  It is the bet interpretation of this I can find.
     const isbn = req.params.isbn;
 
-    res.send(JSON.stringify(books[isbn],null,4));
+    //  Task 11:  Add the code for getting the book details based on ISBN (done in Task 2) using Promise callbacks
+        let myPromise = new Promise((resolve,reject) => {
+        res.send(JSON.stringify(books[isbn],null,4));
+        resolve("get book details based on isbn promise resolved")
+    });
+
+    myPromise.then((successMessage) => {
+        console.log("From Callback " + successMessage)
+    });
+
 });
   
 // Get book details based on author
