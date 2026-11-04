@@ -1,0 +1,2 @@
+curl -X DELETE -b cookies.txt -c cookies.txt https://danielmkorn-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/customer/auth/review/1 -H "Content-Type: application/json"
+{"message":"Book review has been deleted"}

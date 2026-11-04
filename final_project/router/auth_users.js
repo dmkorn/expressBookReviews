@@ -68,31 +68,27 @@ regd_users.post("/login", (req,res) => {
 regd_users.put("/auth/review/:isbn", (req, res) => {
 
 
-    //Write your code here
-
-
     //  Task 8:  Complete the code for adding or modifying a book review
-    const username = req.session.authorization['username']
+
 
 
     // Check for username stored in session authorization
+    const username = req.session.authorization['username']    
     if (!username) {
         return res.status(404).json({ message: "Username in session required for login" });
     }
 
     const isbn = req.params.isbn;
-    const review = req.body.review;
-
     if (!isbn) {
         return res.status(404).json({ message: "ISBN parameter required for adding a book review" });
     }
 
+    const review = req.body.review;
     if (!review) {
         return res.status(404).json({ message: "Review parameter required for adding a book review" });
     }
 
     let book = books[isbn];
-
     if (!book) {
         return res.status(404).json({ message: "Book not found.  ISBN parameter required to correspond to a book in the database." });
     }
@@ -101,7 +97,35 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
     book.reviews[username] = review;
 
     return res.status(200).json({message: "Book review has been saved"});
+});
 
+regd_users.delete("/auth/review/:isbn", (req, res) => {
+
+    //  Task 9:  Complete the code for deleting a book review
+
+    // Check for username stored in session authorization
+    const username = req.session.authorization['username']
+    if (!username) {
+        return res.status(404).json({ message: "Username in session required for login" });
+    }
+
+    const isbn = req.params.isbn;
+    if (!isbn) {
+        return res.status(404).json({ message: "ISBN parameter required for adding a book review" });
+    }
+
+    let book = books[isbn];
+    if (!book) {
+        return res.status(404).json({ message: "Book not found.  ISBN parameter required to correspond to a book in the database." });
+    }
+
+    //  Check if this user does not have a book review to delete
+    if (book.reviews[username] === undefined){
+        return res.status(404).json({ message: "Review by this user not foudn for deletion." });
+    }
+
+    delete book.reviews[username];
+    return res.status(200).json({message: "Book review has been deleted"});
 });
 
 
