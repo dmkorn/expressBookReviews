@@ -121,13 +121,20 @@ public_users.get('/title/:title',function (req, res) {
 
     let titleBooks = {};
 
-    for(const key in books) {
-        if (Object.hasOwn(books,key) && books[key].title === title) {
-            titleBooks[key] = books[key]
-        }
-    }
+    //  Task 13:  Add the code for getting the book details based on Title (done in Task 4) using Promise callbacks
+    let myPromise = new Promise((resolve,reject) => {
+        for(const key in books) {
+            if (Object.hasOwn(books,key) && books[key].title === title) {
+                titleBooks[key] = books[key]
+            }
+        };
 
-    res.send(JSON.stringify(titleBooks, null, 4));
+        res.send(JSON.stringify(titleBooks, null, 4));
+    });
+
+    myPromise.then((successMessage) => {
+        console.log("From Callback: " + successMessage)
+    });
 });
 
 //  Get book review
