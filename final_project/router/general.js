@@ -61,7 +61,7 @@ public_users.get('/',function (req, res) {
     });
 
     myPromise.then((successMessage) => {
-        console.log("From Callback " + successMessage)
+        console.log("From Callback: " + successMessage)
     });
 });
 
@@ -80,27 +80,38 @@ public_users.get('/isbn/:isbn',function (req, res) {
     });
 
     myPromise.then((successMessage) => {
-        console.log("From Callback " + successMessage)
+        console.log("From Callback: " + successMessage)
     });
 
 });
-  
+
+
 // Get book details based on author
 public_users.get('/author/:author',function (req, res) {
 
     //  Task 3:  Complete the code for getting the book details based on the author 
     const author = req.params.author;
 
-    let authorsBooks = {};
+    //  Task 12:  Add the code for getting the book details based on Author (done in Task 3) using Promise callbacks 
+    let myPromise = new Promise((resolve,reject) => {
 
-    for (const key in books) {
-        if (Object.hasOwn(books, key) && books[key].author === author) {
-            authorsBooks[key] = books[key]
-        }
-    }
+        let authorsBooks = {};
 
-    res.send(JSON.stringify(authorsBooks, null, 4));
+        for (const key in books) {
+            if (Object.hasOwn(books, key) && books[key].author === author) {
+                authorsBooks[key] = books[key]
+            }
+        };
+
+        res.send(JSON.stringify(authorsBooks, null, 4));
+        resolve("get book details based on author promise resolved");
+    });
+
+    myPromise.then((successMessage) => {
+        console.log("From Callback: " + successMessage)
+    });
 });
+
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
